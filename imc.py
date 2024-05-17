@@ -64,6 +64,30 @@ print(f"Sua classificação é: {classificacaoimc(calcularimc(peso, altura))}")
 
 print("--------TREINOS------------\n")
 
+treinos = {
+    "1":["GRAVITON (N) 4X10 |", "PUXADOR FRENTE (N) 4X12, 3X8 |", "PUXADOR INVERSO 4X12, 3X8 |", "REMADA CURVA (PRO) 4X12 | ", "ROSCA INVERSA POLIA 3X15|", "ROSCA SCOOT 4X12(FI) 2X8(UNI)|", "ELAVAÇÃO LATERAL(POLIA) 3X10+FALHA|", "HIT + ABS INFRA + AERÓBICO"],
+    "2":["HACK MACHINE 4X 10,12,2X10|", "HAC 45 4X12, 3X10|", "AFUNDO 4X 1X10,1X12, 2X10|", "CADEIRA FLEXORA + PASSADA 4X12 , 15|", "CADEIRA EXTENSORA 4X ISO5' + 15|", "PANTURRILHA 3X20"],
+    "3":["MANGUITOS AQUE|","DESENVOLVIMENTO 3X15|","CRUXIFIXO INVERSO 3X15|","ELEV.LAT PO.5X15|","DESENVOL HALT 3X15|","ADUCÇÃO+ABDU(H2) 3X15|","ENCOLHIMENTO 3X15|","HIT ABS -> SO ABS"],
+    "4":["SUPINO INCLI 4X12|","SUP VERT 4X12|","TRICEPS TEST(W) 4X15|","TRICEPS COICE 4X12|", "APOIO SOLO + TRICEPS CORDA 4X12|", "VOADOR 4X12"]
+}
+def exibirtreino(nometreino):
+    if nometreino in treinos:
+        print(f"Treino -> {nometreino}")
+        print("Exercicios")
+        for exercicio in treinos[nometreino]:
+            print(f"{exercicio}")
+    else:
+        print("Treino não encontrado")
+while True:
+    escolha = input('Digite o treino que você deseja -> 1 - Costas | 2 - Pernas | 3 - Ombros | 4 - Peito: ')
+    escolha = escolha.strip() + ""
+
+    exibirtreino(escolha)
+
+    repetir = input("Deseja selecionar outro treino? (s/n): ").strip().lower()
+    if repetir != 's':
+        print("Encerrando o programa.")
+        break
 
 
 
