@@ -62,3 +62,8 @@ def classificacaoimc(imc):
 print(f"O seu imc é: {calcularimc(peso,altura):.2f}")
 print(f"Sua classificação é: {classificacaoimc(calcularimc(peso, altura))}")
 
+print("--------TREINOS------------\n")
+
+
+
+
