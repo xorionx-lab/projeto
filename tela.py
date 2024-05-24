@@ -1,24 +1,20 @@
 import streamlit as st
-from imc import *
 
+# Definir funções
 def cadastro():
-    contador = 0
-    while contador < 3:
-        nome = st.text_input("Digite o nome para o cadastro:", key=f"nome{contador}")
-        senha = st.text_input("Digite uma senha para o cadastro:", type="password", key=f"senha{contador}")
-        csenha = st.text_input("Confirme a senha:", type="password", key=f"csenha{contador}")
+    nome = st.text_input("Digite o nome para o cadastro:", key="nome")
+    senha = st.text_input("Digite uma senha para o cadastro:", type="password", key="senha")
+    csenha = st.text_input("Confirme a senha:", type="password", key="csenha")
 
-        if st.button("Cadastrar", key=f"cadastrar{contador}"):
-            if senha == csenha:
-                st.success(f"Seja Bem-Vindo: {nome}")
-                break
-            else:
-                st.error("Senhas não conferem. Tente novamente.")
-                contador += 1
+    if st.button("Cadastrar"):
+        if senha == csenha:
+            st.success(f"Seja Bem-Vindo: {nome}")
+        else:
+            st.error("Senhas não conferem. Tente novamente.")
 
-def informacoesCliente():
+def informacoes_cliente():
     nome = st.text_input("Digite seu nome:")
-    idade = st.number_input("Digite sua idade:", min_value=0)
+    idade = st.number_input("Digite sua idade:", min_value=0, step=1)
     peso = st.number_input("Digite seu peso:", min_value=0.0, format="%.2f")
     altura = st.number_input("Digite sua altura:", min_value=0.0, format="%.2f")
 
@@ -29,7 +25,7 @@ def informacoesCliente():
         st.write(f"Esse é seu peso: {peso}")
         st.write(f"Essa é sua altura: {altura}")
 
-def tabela():
+def tabela_imc():
     st.write("----Classificação IMC----")
     st.write("----IMC-----|-----Classificação----")
     st.write("Menor que 18.5 | Abaixo do peso")
@@ -38,11 +34,14 @@ def tabela():
     st.write("30 - 34.9 | Obesidade Grau I")
     st.write("35 - 39.9 | Obesidade Grau II")
     st.write("Maior que 40 | Obesidade Grau III")
-def calcularimc(peso, altura):
-    imc = peso / (altura ** 2)
-    return imc
 
-def classificacaoimc(imc):
+def calcular_imc(peso, altura):
+    if altura > 0:
+        imc = peso / (altura ** 2)
+        return imc
+    return None
+
+def classificacao_imc(imc):
     if imc < 18.5:
         return "Abaixo do peso"
     elif 18.5 <= imc <= 24.9:
@@ -77,28 +76,32 @@ def exibirtreino(nometreino):
     else:
         st.error("Treino não encontrado")
 
+# Aplicativo Streamlit
 st.title("*-----Sistema de Cadastro------*")
 
 st.header("Cadastro")
 cadastro()
 
 st.header("Informações do Cliente")
-informacoesCliente()
+informacoes_cliente()
 
 tabelaimc = st.selectbox("Gostaria de ver a tabela de IMC?", ["Não", "Sim"])
 
 if tabelaimc == "Sim":
-    tabela()
+    tabela_imc()
 
 st.header("Calcular IMC")
 peso = st.number_input("Digite seu peso (kg):", min_value=0.0, format="%.2f")
 altura = st.number_input("Digite sua altura (m):", min_value=0.0, format="%.2f")
 
 if st.button("Calcular IMC"):
-    imc = calcularimc(peso, altura)
-    classificacao = classificacaoimc(imc)
-    st.write(f"O seu IMC é: {imc:.2f}")
-    st.write(f"Sua classificação é: {classificacao}")
+    imc = calcular_imc(peso, altura)
+    if imc:
+        classificacao = classificacao_imc(imc)
+        st.write(f"O seu IMC é: {imc:.2f}")
+        st.write(f"Sua classificação é: {classificacao}")
+    else:
+        st.error("Altura deve ser maior que zero.")
 
 st.header("Treinos")
 treino_escolhido = st.selectbox('Digite o treino que você deseja:', ["1 - Costas", "2 - Pernas", "3 - Ombros", "4 - Peito"])
