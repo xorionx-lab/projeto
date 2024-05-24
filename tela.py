@@ -1,5 +1,4 @@
 import streamlit as st
-from imc import *
 
 def cadastro():
     contador = 0
@@ -11,4 +10,4 @@ def cadastro():
     if st.button("Cadastrar",key=f"Cadastrar{contador}"):
         if senha == csenha:
             st.success(f"Seja bem vindo: {nome}")
-            break
+
