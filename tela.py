@@ -2,10 +2,11 @@ import streamlit as st
 
 # definir funções
 # função cadastrar
+
 def cadastrar():
-    nome = st.text_input("Digite seu nome para cadastro: ",key="nome")
-    senha = st.text_input("Digite uma senha para cadastro: ", type="password",key="senha")
-    csenha = st.text_input("Confirme a senha: ", type="password",key="csenha")
+    nome = st.text_input("Digite seu nome para cadastro: ", key="nome")
+    senha = st.text_input("Digite uma senha para cadastro: ", type="password", key="senha")
+    csenha = st.text_input("Confirme a senha: ", type="password", key="csenha")
 
     if st.button("Cadastrar"):
         if senha == csenha:
@@ -17,7 +18,7 @@ def cadastrar():
 
 def informacao_cliente():
     nome = st.text_input("Digite seu nome: ")
-    idade = st.number_input("Digite sua idade: ")
+    idade = int(st.number_input("Digite sua idade: "))
     altura = st.number_input("Digite sua altura: ")
     peso = st.number_input("Digite seu peso: ")
 
@@ -86,6 +87,7 @@ def exibirtreino(nometreino):
 ## APLICATIVO STREAMLIT
 
 st.write("Sistema de cadastro do cliente")
+
 
 st.header("Cadastro")
 cadastrar()
