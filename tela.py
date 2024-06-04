@@ -108,7 +108,7 @@ if st.button("Calcular IMC"):
     imc = calcularimc(peso,altura)
     if imc:
         classificacao = classificacaoimc(imc)
-        st.write(f"O seu IMC é ->  {imc:.2f}")
+        st.write(f"O seu IMC é ->  {imc:.2f} que é considerado {classificacao}")
     else:
         st.error("Altura dever ser maior que zero")
 
